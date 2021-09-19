@@ -2,43 +2,42 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: frontend
-  name: frontend
+    app: mysql
+  name: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: frontend
+      app: mysql
   template:
     metadata:
       labels:
-        app: frontend
+        app: mysql
     spec:
       containers:
-      - image: rajmanohar/frontend:v3.1
-        name: frontend
-        env:
-          - name: API_URL
-            value: "http://backend:5000/api/"
-          - name: PHOTO_URL
-            value: "http://backend:5000/Photos/"
+      - image: rajmanohar/database-mysql:v2
+         name: mysql
+         env:
+           - name: MYSQL_ROOT_PASSWORD
+             value: "password"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: frontend
-  name: frontend
+    app: mysql
+  name: mysql
 spec:
   ports:
-  - name: http
-    port: 3000
-    protocol: TCP
-    targetPort: 3000
+    - name: http
+      port: 3306
+      protocol: TCP
+      targetPort: 3306
   selector:
-    app: frontend
+    app: mysql
   type: ClusterIP
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -86,45 +85,50 @@ spec:
     app: backend
   type: ClusterIP
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: mysql
-  name: mysql
+    app: frontend
+  name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: frontend
   template:
     metadata:
       labels:
-        app: mysql
+        app: frontend
     spec:
       containers:
-      - image: rajmanohar/database-mysql:v2
-        name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "password"
+        - image: rajmanohar/frontend:v3.1
+          name: frontend
+          env:
+            - name: API_URL
+              value: "http://backend:5000/api/"
+            - name: PHOTO_URL
+              value: "http://backend:5000/Photos/"
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mysql
-  name: mysql
+    app: frontend
+  name: frontend
 spec:
   ports:
     - name: http
-      port: 3306
+      port: 3000
       protocol: TCP
-      targetPort: 3306
+      targetPort: 3000
   selector:
-    app: mysql
+    app: frontend
   type: ClusterIP
 ---
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
