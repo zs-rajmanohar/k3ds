@@ -15,7 +15,7 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: rajmanohar/frontend:v3
+      - image: rajmanohar/frontend:v3.1
         name: frontend
 ---
 apiVersion: v1
