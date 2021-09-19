@@ -58,17 +58,17 @@ spec:
       containers:
       - image: rajmanohar/dotnet-backend:v3
         name: backend
-        env:
-          - name: MYSQL_DATABASE_PASSWORD
-            value: "password"
-          - name: MYSQL_DATABASE_USER
-            value: "root"
-          - name: MYSQL_DATABASE_DB
-            value: "dbo"
-          - name: MYSQL_DATABASE_HOST
-            value: "backend"
-          - name: MYSQL_DATABASE_PORT
-            value: "3306"
+#        env:
+#          - name: MYSQL_DATABASE_PASSWORD
+#            value: "password"
+#          - name: MYSQL_DATABASE_USER
+#            value: "root"
+#          - name: MYSQL_DATABASE_DB
+#            value: "dbo"
+#          - name: MYSQL_DATABASE_HOST
+#            value: "backend"
+#          - name: MYSQL_DATABASE_PORT
+#            value: "3306"
 ---
 apiVersion: v1
 kind: Service
