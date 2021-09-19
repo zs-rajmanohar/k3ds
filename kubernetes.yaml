@@ -57,6 +57,10 @@ spec:
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: "password"
+          - name: MYSQL_ROOT_USER
+            value: "root"
+          - name: MYSQL_DB
+            value: "dbo"
 ---
 apiVersion: v1
 kind: Service
@@ -123,13 +127,13 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend
-                port:
-                  number: 3000
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: frontend
+#                port:
+#                  number: 3000
           - path: /api
             pathType: Prefix
             backend:
