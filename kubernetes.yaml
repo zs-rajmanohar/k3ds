@@ -17,6 +17,7 @@ spec:
       containers:
       - image: rajmanohar/frontend:v3.1
         name: frontend
+
 ---
 apiVersion: v1
 kind: Service
@@ -53,6 +54,9 @@ spec:
       containers:
       - image: rajmanohar/dotnet-backend:v3
         name: backend
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "password"
 ---
 apiVersion: v1
 kind: Service
