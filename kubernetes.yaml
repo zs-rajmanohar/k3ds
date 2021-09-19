@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
       - image: rajmanohar/database-mysql:v2
-         name: mysql
-         env:
-           - name: MYSQL_ROOT_PASSWORD
-             value: "password"
+        name: mysql
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: "password"
 ---
 apiVersion: v1
 kind: Service
@@ -103,13 +103,13 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: rajmanohar/frontend:v3.1
-          name: frontend
-          env:
-            - name: API_URL
-              value: "http://backend:5000/api/"
-            - name: PHOTO_URL
-              value: "http://backend:5000/Photos/"
+      - image: rajmanohar/frontend:v3.1
+        name: frontend
+        env:
+          - name: API_URL
+            value: "http://backend:5000/api/"
+          - name: PHOTO_URL
+            value: "http://backend:5000/Photos/"
 ---
 
 apiVersion: v1
